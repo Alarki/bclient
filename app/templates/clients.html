@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients - Bclient</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <nav>
+        <a href="/" class="active">Clients</a>
+        <a href="/contacts">Contacts</a>
+    </nav>
+
+    <div class="container">
+        <!-- List View -->
+        <div id="list-view">
+            <div class="page-header">
+                <h1>Clients</h1>
+                <button class="btn" onclick="showCreateForm()">+ New Client</button>
+            </div>
+            <div id="client-list-container">
+                <!-- Table will be injected here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Create/Edit Form View -->
+        <div id="form-view" class="hidden">
+            <div class="page-header">
+                <h1 id="form-title">New Client</h1>
+                <button class="btn btn-secondary" onclick="showListView()">Back to List</button>
+            </div>
+
+            <div id="alert-box" class="alert"></div>
+
+            <div class="card">
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('general')">General</div>
+                    <div class="tab" onclick="switchTab('contacts')">Contact(s)</div>
+                </div>
+
+                <!-- General Tab -->
+                <div id="tab-general" class="tab-content active">
+                    <form id="client-form" onsubmit="saveClient(event)">
+                        <div class="form-group">
+                            <label for="client-name">Name *</label>
+                            <input type="text" id="client-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="client-code">Client Code</label>
+                            <!-- Readonly and hidden until saved -->
+                            <input type="text" id="client-code" class="form-control" readonly placeholder="Auto-generated">
+                        </div>
+                        <button type="submit" class="btn">Save Client</button>
+                    </form>
+                </div>
+
+                                <!-- Contacts Tab -->
+                <div id="tab-contacts" class="tab-content">
+                    <div id="contacts-tab-content" class="hidden">
+                        <!-- Link new contact form -->
+                        <div style="display: flex; gap: 1rem; margin-bottom: 2rem; align-items: flex-end;">
+                            <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                                <label for="link-contact-select">Link a new contact</label>
+                                <select id="link-contact-select" class="form-control">
+                                    <option value="">-- Select a contact --</option>
+                                </select>
+                            </div>
+                            <button class="btn" onclick="linkContact()">Link</button>
+                        </div>
+                        
+                        <!-- List of linked contacts -->
+                        <div id="linked-contacts-list"></div>
+                    </div>
+                    <p id="contacts-tab-placeholder" style="color: var(--text-muted);">Save the client first to link contacts.</p>
+                </div>
+
+    <!-- Load the JavaScript -->
+    <script src="/static/js/clients.js"></script>
+</body>
+</html>

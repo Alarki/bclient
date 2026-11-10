@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts - Bclient</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <nav>
+        <a href="/">Clients</a>
+        <a href="/contacts" class="active">Contacts</a>
+    </nav>
+
+    <div class="container">
+        <!-- List View -->
+        <div id="list-view">
+            <div class="page-header">
+                <h1>Contacts</h1>
+                <button class="btn" onclick="showCreateForm()">+ New Contact</button>
+            </div>
+            <div id="contact-list-container">
+                <!-- Table will be injected here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Create/Edit Form View -->
+        <div id="form-view" class="hidden">
+            <div class="page-header">
+                <h1 id="form-title">New Contact</h1>
+                <button class="btn btn-secondary" onclick="showListView()">Back to List</button>
+            </div>
+
+            <div id="alert-box" class="alert"></div>
+
+            <div class="card">
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('general')">General</div>
+                    <div class="tab" onclick="switchTab('clients')">Client(s)</div>
+                </div>
+
+                <!-- General Tab -->
+                <div id="tab-general" class="tab-content active">
+                    <form id="contact-form" onsubmit="saveContact(event)">
+                        <div class="form-group">
+                            <label for="contact-name">Name *</label>
+                            <input type="text" id="contact-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-surname">Surname *</label>
+                            <input type="text" id="contact-surname" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email Address *</label>
+                            <input type="email" id="contact-email" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn">Save Contact</button>
+                    </form>
+                </div>
+
+                                <!-- Clients Tab -->
+                <div id="tab-clients" class="tab-content">
+                    <div id="clients-tab-content" class="hidden">
+                        <!-- Link new client form -->
+                        <div style="display: flex; gap: 1rem; margin-bottom: 2rem; align-items: flex-end;">
+                            <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                                <label for="link-client-select">Link a new client</label>
+                                <select id="link-client-select" class="form-control">
+                                    <option value="">-- Select a client --</option>
+                                </select>
+                            </div>
+                            <button class="btn" onclick="linkClient()">Link</button>
+                        </div>
+                        
+                        <!-- List of linked clients -->
+                        <div id="linked-clients-list"></div>
+                    </div>
+                    <p id="clients-tab-placeholder" style="color: var(--text-muted);">Save the contact first to link clients.</p>
+                </div>
+
+    <!-- Load the JavaScript -->
+    <script src="/static/js/contacts.js"></script>
+</body>
+</html>
